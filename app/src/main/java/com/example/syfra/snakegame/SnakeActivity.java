@@ -19,7 +19,7 @@ public class SnakeActivity extends Activity {
 
         //Volume
         int maxVolume = 50;
-        float log1=(float)(Math.log(maxVolume-30)/Math.log(maxVolume));
+        float log1=(float)(Math.log(maxVolume-50)/Math.log(maxVolume));
         themeSong.setVolume(1-log1,1-log1);
 
         themeSong.start();
