@@ -16,6 +16,12 @@ public class SnakeActivity extends Activity {
 
         themeSong = MediaPlayer.create(this,R.raw.snakethemesong);
         themeSong.setLooping(true);
+
+        //Volume
+        int maxVolume = 50;
+        float log1=(float)(Math.log(maxVolume-30)/Math.log(maxVolume));
+        themeSong.setVolume(1-log1,1-log1);
+
         themeSong.start();
 
         //find out the width and height of the screen
@@ -44,6 +50,7 @@ public class SnakeActivity extends Activity {
     @Override
     protected void onPause(){
         super.onPause();
+
         snakeView.pause();
         snakeView.pauseStatus = true;
         themeSong.pause();

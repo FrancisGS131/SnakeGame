@@ -89,11 +89,6 @@ public class SnakeView extends SurfaceView implements Runnable {
     private float finalXCoordinates = -1;
     private float finalYCoordinates = -1;
 
-    //Theme song
-    private boolean playingSong = false;
-    private long duration = 43000; // in ms
-    private long stamp = -1;
-
     //******Constructor*******
     public SnakeView(Context context, Point size){
         super(context);
@@ -135,18 +130,6 @@ public class SnakeView extends SurfaceView implements Runnable {
         }
     }
 
-    /*
-    public void playThemeSong(){
-        if(!playingSong) {
-            mSoundPool.play(themeSong, 1, 1, 1, 1, 1);
-            playingSong = true;
-            stamp = System.currentTimeMillis();
-        }
-        long elapsed = System.currentTimeMillis() - stamp;
-        if(elapsed >= duration)
-            playingSong = false;
-    }
-    */
     public void pause(){
         mPlaying = false;
         try {
@@ -193,10 +176,6 @@ public class SnakeView extends SurfaceView implements Runnable {
 
             descriptor = assetManager.openFd("death_sound.ogg");
             mDeadSound = mSoundPool.load(descriptor,0);
-
-            //Extras
-            //descriptor = assetManager.openFd("Chill House Loop.wav");
-            //themeSong = mSoundPool.load(descriptor,1);
         } catch (IOException e){
             Log.e("Error","Error in loading sounds");
         }
@@ -387,59 +366,4 @@ public class SnakeView extends SurfaceView implements Runnable {
         }
         return true;
     }
-
-    /*
-    ----OLD CODE----
-    @Override
-    public boolean onTouchEvent(MotionEvent motionEvent){
-        switch (motionEvent.getAction() & MotionEvent.ACTION_MASK)
-        {
-            case MotionEvent.ACTION_UP:
-                System.out.println("Final X Coords: "+motionEvent.getX()+" | Final Y Coords: "+motionEvent.getY());
-
-                if(motionEvent.getX() >= mScreenWidth/2)
-                {
-                    switch (mDirection)
-                    {
-                        case UP:
-                            mDirection = Direction.RIGHT;
-                            break;
-                        case RIGHT:
-                            mDirection = Direction.DOWN;
-                            break;
-                        case DOWN:
-                            mDirection = Direction.LEFT;
-                            break;
-                        case LEFT:
-                            mDirection = Direction.UP;
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (mDirection)
-                    {
-                        case UP:
-                            mDirection = Direction.LEFT;
-                            break;
-                        case LEFT:
-                            mDirection = Direction.DOWN;
-                            break;
-                        case DOWN:
-                            mDirection = Direction.RIGHT;
-                            break;
-                        case RIGHT:
-                            mDirection = Direction.UP;
-                            break;
-                    }
-                }
-             case MotionEvent.ACTION_DOWN:
-                 if(pauseStatus)
-                     pauseStatus = false;
-                 System.out.println("X Coords: "+motionEvent.getX()+" | Y Coords: "+motionEvent.getY());
-        }
-        return true;
-    }
-    */
-
 }
